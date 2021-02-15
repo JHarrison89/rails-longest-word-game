@@ -13,12 +13,15 @@ class GamesController < ApplicationController
   def score
     @answerString = params[:answer]
     @answer = params[:answer].split("")
+    @a = params[:answer]
     @letters = params[:letters].split(" ")
 
     if english_word?(@answerString) && included?(@answer, @letters)
-      @result = 'zing!'
+      @result = "congratulations! #{@a} is a valid word"
+    elsif english_word?(@answerString) && !included?(@answer, @letters)
+      @result = 'Letters no included'
     else
-      @result = 'no'
+      @result = 'answer is not a word'
     end
   end
 
